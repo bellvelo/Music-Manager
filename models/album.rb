@@ -26,7 +26,20 @@ def self.all
   return albums.map {|album_hash| Album.new(album_hash)}
 end
 
-def self.delete_all
+def update()
+  sql = "UPDATE albums SET (title, genre, artist_id)
+      = ($1, $2, $3) WHERE id = $4"
+  values = [@title, @genre, @artist_id, @id]
+  SqlRunner.run(sql, values)
+end
+
+def delete()
+  sql = "DELETE FROM albums WHERE id = $1"
+  values = [@id]
+  SqlRunner.run(sql, values)
+end
+
+def self.delete_all()
   sql = "DELETE FROM albums"
   SqlRunner.run(sql)
 end
@@ -38,12 +51,13 @@ def artists
   return Artist.new(result[0])
 end
 
-def update()
-  sql = "UPDATE albums SET (title, genre, artist_id)
-      = ($1, $2, $3) WHERE id = $4"
-  values = [@title, @genre, @artist_id, @id]
-  SqlRunner.run(sql, values)
+def self.search_album_by_id(id)
+  sql = "SELECT FROM albums WHERE id = $1"
+  values = [id]
+  results = SqlRunner.run(sql, values)
+  return Album.new(results[0])
 end
+
 
 
 #this is the end
