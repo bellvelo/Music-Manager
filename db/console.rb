@@ -11,6 +11,10 @@ require_relative('../models/album')
 artist1 = Artist.new ({
   "name" => "David Bowie"
   })
+
+# artist1.name = "Frank Zappa"
+# artist1.update()
+
 artist2 = Artist.new ({
   "name" => "Radiohead"
   })
@@ -23,6 +27,8 @@ album1 = Album.new ({
   "genre" => "Psych-Rock",
   "artist_id" => artist1.id
   })
+album1.title = "Spiders from Venus"
+album1.update()  
 album2 = Album.new ({
   "title" => "Ziggy Stardust",
   "genre" => "Space-Rock",
